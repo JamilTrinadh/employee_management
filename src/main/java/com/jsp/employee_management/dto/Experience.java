@@ -14,13 +14,13 @@ public class Experience {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int exid;
-	private String cName;
+	private String cname;
 	private int yoe;
 	private int moe;
 	private String desig;
-	public Experience(String cName, int yoe, int moe, String desig) {
+	public Experience(String cname, int yoe, int moe, String desig) {
 		super();
-		this.cName = cName;
+		this.cname = cname;
 		this.yoe = yoe;
 		this.moe = moe;
 		this.desig = desig;

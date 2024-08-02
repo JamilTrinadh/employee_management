@@ -27,8 +27,8 @@ public class Employee {
 	private String lname;
 	private int age;
 	private String gender;
-	@Column(unique = true)
 	private Date dob;
+	@Column(unique = true)
 	private String email;
 	private String pwd;
 	@Lob

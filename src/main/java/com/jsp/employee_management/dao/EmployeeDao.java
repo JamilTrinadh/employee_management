@@ -31,5 +31,12 @@ public class EmployeeDao {
 		java.util.Optional<Employee> em = repo.findById(id);
 		return em.get();
 	}
+	
+	public Employee fetchByEmail(String email) {
+		Employee em = repo.fetchByEmail(email);
+		return em;
+	}
+	
+	
 
 }

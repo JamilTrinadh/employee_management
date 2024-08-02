@@ -1,4 +1,4 @@
-package com.jsp.employee_managemet.dto;
+package com.jsp.employee_management.dto;
 
 import java.util.Date;
 import java.util.List;

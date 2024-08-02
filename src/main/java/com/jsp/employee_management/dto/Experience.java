@@ -1,4 +1,4 @@
-package com.jsp.employee_managemet.dto;
+package com.jsp.employee_management.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

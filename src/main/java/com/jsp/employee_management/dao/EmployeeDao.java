@@ -14,7 +14,7 @@ public class EmployeeDao {
 	EmployeeRepo repo;
 	
 	public Employee save(Employee em) {
-		Employee e =repo.save(em);
+		Employee e = repo.save(em);
 		return e;
 	}
 	

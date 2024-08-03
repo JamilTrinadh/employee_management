@@ -102,6 +102,41 @@ public class EmployeeService {
 		sender.send(message);
 		return new ResponseEntity<ResponseStructure<EmployeeClone>>(rs,HttpStatus.ACCEPTED);
 	}
+
+	public ResponseEntity<ResponseStructure<Employee>> login(String email, String pwd) throws MessagingException {
+		Employee em = dao.fetchByEmail(email);
+		ResponseStructure<Employee> rs = new ResponseStructure<Employee>();
+		if(em.getPwd().equals(pwd)) {	
+			rs.setData(em);
+			rs.setMsg("login successful");
+			MimeMessage message = sender.createMimeMessage();
+			message.setRecipients(MimeMessage.RecipientType.TO,em.getEmail());
+			message.setSubject("Login Details");
+			
+			String htmlContent = "<h1>You have successfully login on J10</h1>"
+					+"<img src=\"https://template.canva.com/EAFhV_byuNw/1/0/311w-QF1wi5PupMc.jpg\" alt=\"beer picture\" width=\"500\" height=\"600\">"
+					+ "<p>You can <strong>Party</strong> now.</p>"+ em;
+			message.setContent(htmlContent, "text/html; charset=utf-8");
+			sender.send(message);
+			rs.setStatuscode(HttpStatus.ACCEPTED.value());
+			return new ResponseEntity<ResponseStructure<Employee>>(rs,HttpStatus.ACCEPTED);
+		}else {
+			rs.setData(null);
+			rs.setMsg("login unsuccessful");
+			rs.setStatuscode(HttpStatus.BAD_REQUEST.value());
+			MimeMessage message = sender.createMimeMessage();
+			message.setRecipients(MimeMessage.RecipientType.TO,email);
+			message.setSubject("Login Details");
+			
+			String htmlContent = "<h1>login unsuccessful please try again on J10</h1>"
+					+"<img src=\"https://template.canva.com/EAFhV_byuNw/1/0/311w-QF1wi5PupMc.jpg\" alt=\"beer picture\" width=\"500\" height=\"600\">"
+					+ "<p>You can <strong>Party</strong> now.</p>"+ email;
+			message.setContent(htmlContent, "text/html; charset=utf-8");
+			sender.send(message);
+			return new ResponseEntity<ResponseStructure<Employee>>(rs,HttpStatus.BAD_REQUEST);
+		}
+		
+	}
 	
 
 }

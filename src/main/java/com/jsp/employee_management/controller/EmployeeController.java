@@ -49,5 +49,10 @@ public class EmployeeController {
 	public String delete(@PathVariable int id) throws MessagingException {
 		return service.delete(id);
 	}
+	
+	@GetMapping("/login")
+	public ResponseEntity<ResponseStructure<Employee>> login(@RequestParam String email,@RequestParam String pwd) throws MessagingException{
+		return service.login(email,pwd);
+	}
 
 }

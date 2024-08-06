@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.jsp.employee_management.util.ResponseStructure;
 
 @RestControllerAdvice
-public class EmployeeManagementException {
+public class EmployeeManagementExceptionHandler {
 	
 	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
 	public ResponseEntity<ResponseStructure<String>> sqlIntegrity(SQLIntegrityConstraintViolationException ex){
@@ -21,5 +21,17 @@ public class EmployeeManagementException {
 		return new ResponseEntity<ResponseStructure<String>>(rs,HttpStatus.BAD_REQUEST);
 		
 	}
+	
+	@ExceptionHandler(EmployeeNotFoundException.class)
+	public ResponseEntity<ResponseStructure<String>> empNotFound(EmployeeNotFoundException ex){
+		ResponseStructure<String> rs = new ResponseStructure<String>();
+		rs.setStatuscode(HttpStatus.BAD_REQUEST.value());
+		rs.setData(ex.getMessage());
+		rs.setMsg("employee not present with sent data");
+		return new ResponseEntity<ResponseStructure<String>>(rs,HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	
 	
 }

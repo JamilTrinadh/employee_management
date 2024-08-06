@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jsp.employee_management.dto.Employee;
+import com.jsp.employee_management.exception.EmployeeNotFoundException;
 import com.jsp.employee_management.repo.EmployeeRepo;
 
 @Repository
@@ -27,9 +28,14 @@ public class EmployeeDao {
 		repo.deleteById(id);
 	}
 	
-	public Employee fetchByid(int id) {
+	public Employee fetchByid(int id) throws EmployeeNotFoundException {
 		java.util.Optional<Employee> em = repo.findById(id);
-		return em.get();
+		try {
+			return em.get();
+		}catch(Exception ex) {
+			throw new EmployeeNotFoundException();
+		}
+		
 	}
 	
 	public Employee fetchByEmail(String email) {
